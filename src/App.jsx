@@ -1,4 +1,10 @@
+import BotCollection from "./BotCollection";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <BotCollection />
+    </div>
+  );
 };
 export default App;
