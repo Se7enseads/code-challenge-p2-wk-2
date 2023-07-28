@@ -1,6 +1,3 @@
-import { checkPropTypes } from "prop-types";
-import React from "react";
-
 const BotCollection = ({ bots }) => {
   return (
     <div className="container-fluid">
@@ -32,20 +29,5 @@ const BotCollection = ({ bots }) => {
       </div>
     </div>
   );
-};
-
-BotCollection.propTypes = {
-  bots: checkPropTypes.arrayOf(
-    checkPropTypes.shape({
-      id: checkPropTypes.number.isRequired,
-      avatar_url: checkPropTypes.string.isRequired,
-      name: checkPropTypes.string.isRequired,
-      bot_class: checkPropTypes.string.isRequired,
-      catchphrase: checkPropTypes.string.isRequired,
-      health: checkPropTypes.number.isRequired,
-      damage: checkPropTypes.number.isRequired,
-      armor: checkPropTypes.number.isRequired,
-    })
-  ).isRequired,
 };
 export default BotCollection;
