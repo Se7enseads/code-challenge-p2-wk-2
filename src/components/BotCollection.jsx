@@ -5,7 +5,7 @@ const BotCollection = ({ bots, click }) => {
     <div className="container-fluid">
       <div className="row">
         {bots.map((bot) => (
-          <Bot bot={bot} key={bot.id} click={click} />
+          <Bot bot={bot} key={bot.id} click={click} location="collection" />
         ))}
       </div>
     </div>
