@@ -22,7 +22,12 @@ const App = () => {
       });
   }, []);
 
-  function handleClick(bot) {
+  const releaseBot = () => {
+    const updatedArmy = army.filter((bot) => bot.id !== bot.id);
+    setArmy(updatedArmy);
+  };
+
+  function addBot(bot) {
     if (!army.some((b) => b.id === bot.id)) {
       setArmy((prevArmy) => [...prevArmy, bot]);
     }
@@ -30,8 +35,8 @@ const App = () => {
 
   return (
     <div>
-      <YourBotArmy army={army} />
-      <BotCollection bots={bots} click={handleClick} />
+      <YourBotArmy army={army} releaseBot={releaseBot} />
+      <BotCollection bots={bots} addBot={addBot} />
     </div>
   );
 };
