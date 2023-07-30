@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 
-const API_URL = "https://api.npoint.io/d2caaa22d430486d2ff6/bots";
+const API_URL = "http://localhost:3000/bots";
 
 const App = () => {
   const [bots, setBots] = useState([]);
@@ -27,11 +27,11 @@ const App = () => {
     setArmy(updatedArmy);
   };
 
-  function addBot(bot) {
+  const addBot = (bot) => {
     if (!army.some((b) => b.id === bot.id)) {
       setArmy((prevArmy) => [...prevArmy, bot]);
     }
-  }
+  };
 
   return (
     <div>
