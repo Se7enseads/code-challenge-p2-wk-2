@@ -1,20 +1,25 @@
+// Importing necessary modules.
+
 import { useEffect, useState } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 
-const API_URL = "http://localhost:3000/bots/";
+const API_URL = "http://localhost:3000/bots/"; // Sets the API url to a variable.
 
+// App component that represents the rendered page.
 const App = () => {
+  // States to hold the list of all bots and the army of selected bots.
   const [bots, setBots] = useState([]);
   const [army, setArmy] = useState([]);
 
+  // Fetches data from the API when the page loads.
   useEffect(() => {
     fetch(API_URL)
-      .then((r) => {
-        if (!r.ok) {
+      .then((response) => {
+        if (!response.ok) {
           console.error("?_? ... (✖╭╮✖)");
         }
-        return r.json();
+        return response.json();
       })
       .then((data) => setBots(data))
       .catch((error) => {
@@ -22,21 +27,26 @@ const App = () => {
       });
   }, []);
 
-  const handleReleaseBot = () => {
-    const updatedArmy = army.filter((bot) => bot.id !== bot.id);
+  // Function to handle releasing a bot from the army.
+  const handleReleaseBot = (botId) => {
+    const updatedArmy = army.filter((bot) => bot.id !== botId);
     setArmy(updatedArmy);
   };
 
+  // Function to handle adding a bot to the army.
   const handleAddBot = (bot) => {
+    // Checks if the bot is not already in the army.
     if (!army.some((b) => b.id === bot.id)) {
       setArmy((prevArmy) => [...prevArmy, bot]);
     }
   };
 
+  // Function to remove an item from an array by its id.
   const removeFromStateById = (array, id) => {
     return array.filter((item) => item.id !== id);
   };
 
+  // Function to handle discharging a bot (deleting it) from the army.
   const handleDischargeBot = (botId) => {
     fetch(API_URL + botId, {
       method: "DELETE",
@@ -45,6 +55,7 @@ const App = () => {
         if (!response.ok) {
           throw new Error("Failed to delete bot.");
         }
+        // Removes the bot from state from both the army and the bot collection.
         setArmy((prevArmy) => removeFromStateById(prevArmy, botId));
         setBots((prevBots) => removeFromStateById(prevBots, botId));
       })
@@ -53,6 +64,7 @@ const App = () => {
       });
   };
 
+  // Renders the components, army and bot collection on to the DOM.
   return (
     <div>
       <YourBotArmy
@@ -64,4 +76,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default App; // Export the App component to the main JSX.
