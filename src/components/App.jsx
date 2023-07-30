@@ -18,7 +18,7 @@ const App = () => {
       })
       .then((data) => setBots(data))
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching bots:", error);
       });
   }, []);
 
@@ -33,17 +33,26 @@ const App = () => {
     }
   };
 
+  const removeFromStateById = (array, id) => {
+    return array.filter((item) => item.id !== id);
+  };
+
   const handleDischargeBot = (botId) => {
     fetch(API_URL + botId, {
       method: "DELETE",
-    }).then(() => {
-      const updatedBotArmy = army.filter((bot) => bot.id !== botId);
-      setArmy(updatedBotArmy);
-
-      const updatedBots = bots.filter((bot) => bot.id !== botId);
-      setBots(updatedBots);
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete bot.");
+        }
+        setArmy((prevArmy) => removeFromStateById(prevArmy, botId));
+        setBots((prevBots) => removeFromStateById(prevBots, botId));
+      })
+      .catch((error) => {
+        console.error("Error deleting bot: ", error);
+      });
   };
+
   return (
     <div>
       <YourBotArmy
