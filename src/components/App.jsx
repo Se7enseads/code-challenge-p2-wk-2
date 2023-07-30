@@ -33,17 +33,18 @@ const App = () => {
     setArmy(updatedArmy)
   }
 
+  // Function to remove an item from an array by its id.
+  const removeFromStateById = (array, id) => {
+    return array.filter(item => item.id !== id)
+  }
+
   // Function to handle adding a bot to the army.
   const handleAddBot = bot => {
     // Checks if the bot is not already in the army.
     if (!army.some(b => b.id === bot.id)) {
       setArmy(prevArmy => [...prevArmy, bot])
+      setBots(prevBots => removeFromStateById(prevBots, bot.id))
     }
-  }
-
-  // Function to remove an item from an array by its id.
-  const removeFromStateById = (array, id) => {
-    return array.filter(item => item.id !== id)
   }
 
   // Function to handle discharging a bot (deleting it) from the army.
@@ -57,7 +58,6 @@ const App = () => {
         }
         // Removes the bot from state from both the army and the bot collection.
         setArmy(prevArmy => removeFromStateById(prevArmy, botId))
-        setBots(prevBots => removeFromStateById(prevBots, botId))
       })
       .catch(error => {
         console.error('Error deleting bot: ', error)
