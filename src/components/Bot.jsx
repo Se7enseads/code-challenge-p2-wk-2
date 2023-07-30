@@ -1,4 +1,4 @@
-const Bot = ({ bot, click, location }) => {
+const Bot = ({ bot, click, discharge, location }) => {
   const { avatar_url, name, bot_class, catchphrase, health, damage, armor } =
     bot;
 
@@ -38,7 +38,7 @@ const Bot = ({ bot, click, location }) => {
             <div className="row mx-auto">
               <button
                 className="btn btn-outline-danger"
-                onClick={() => console.log("clicked!")}
+                onClick={() => discharge(bot.id)}
               >
                 X
               </button>

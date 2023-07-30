@@ -1,6 +1,6 @@
 import Bot from "./Bot";
 
-const YourBotArmy = ({ army, releaseBot }) => {
+const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
   const hasArmy = army.length > 0;
 
   const armyHeader = (
@@ -28,7 +28,13 @@ const YourBotArmy = ({ army, releaseBot }) => {
         {armyHeader}
         {hasArmy
           ? army.map((bot) => (
-              <Bot bot={bot} key={bot.id} click={releaseBot} location="army" />
+              <Bot
+                bot={bot}
+                key={bot.id}
+                click={releaseBot}
+                discharge={dischargeBot}
+                location="army"
+              />
             ))
           : noArmyMessage}
       </div>

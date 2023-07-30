@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 
-const API_URL = "http://localhost:3000/bots";
+const API_URL = "http://localhost:3000/bots/";
 
 const App = () => {
   const [bots, setBots] = useState([]);
@@ -22,21 +22,36 @@ const App = () => {
       });
   }, []);
 
-  const releaseBot = () => {
+  const handleReleaseBot = () => {
     const updatedArmy = army.filter((bot) => bot.id !== bot.id);
     setArmy(updatedArmy);
   };
 
-  const addBot = (bot) => {
+  const handleAddBot = (bot) => {
     if (!army.some((b) => b.id === bot.id)) {
       setArmy((prevArmy) => [...prevArmy, bot]);
     }
   };
 
+  const handleDischargeBot = (botId) => {
+    fetch(API_URL + botId, {
+      method: "DELETE",
+    }).then(() => {
+      const updatedBotArmy = army.filter((bot) => bot.id !== botId);
+      setArmy(updatedBotArmy);
+
+      const updatedBots = bots.filter((bot) => bot.id !== botId);
+      setBots(updatedBots);
+    });
+  };
   return (
     <div>
-      <YourBotArmy army={army} releaseBot={releaseBot} />
-      <BotCollection bots={bots} addBot={addBot} />
+      <YourBotArmy
+        army={army}
+        releaseBot={handleReleaseBot}
+        dischargeBot={handleDischargeBot}
+      />
+      <BotCollection bots={bots} addBot={handleAddBot} />
     </div>
   );
 };
