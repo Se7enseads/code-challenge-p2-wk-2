@@ -7,7 +7,8 @@
     "dev": "vite",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
     "json-server": "json-server --watch src/data/db.json",
-    "eslint": "npx eslint --init"
+    "eslint": "npx eslint --init",
+    "format": "prettier-standard --format"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -21,6 +22,7 @@
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "prettier-standard": "^15.0.1",
     "vite": "^4.4.5"
   }
 }
