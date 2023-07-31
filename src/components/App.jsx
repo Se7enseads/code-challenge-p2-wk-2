@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import SearchBar from './SearchBar'
 
 const API_URL = 'http://localhost:3000/bots/' // Sets the API url to a variable.
 
@@ -38,10 +39,19 @@ const App = () => {
     return array.filter(item => item.id !== id)
   }
 
+  const handleSortBot = sortBy => {
+    const sorted = [...bots]
+    bots.sort((botA, botB) => botB[sortBy] - botA[sortBy])
+    setBots(sorted)
+  }
+
   // Function to handle adding a bot to the army.
   const handleAddBot = bot => {
     // Checks if the bot is not already in the army.
-    if (!army.some(b => b.id === bot.id)) {
+    if (
+      !army.some(b => b.id === bot.id) &&
+      !army.some(b => b.bot_class === bot.bot_class)
+    ) {
       setArmy(prevArmy => [...prevArmy, bot])
       setBots(prevBots => removeFromStateById(prevBots, bot.id))
     }
@@ -72,6 +82,7 @@ const App = () => {
         releaseBot={handleReleaseBot}
         dischargeBot={handleDischargeBot}
       />
+      <SearchBar sortBots={handleSortBot} />
       <BotCollection bots={bots} addBot={handleAddBot} />
     </div>
   )
