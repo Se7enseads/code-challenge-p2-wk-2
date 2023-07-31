@@ -1,5 +1,4 @@
 // Importing necessary modules.
-
 import { useEffect, useState } from 'react'
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
