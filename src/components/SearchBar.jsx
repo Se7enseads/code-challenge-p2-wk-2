@@ -1,24 +1,24 @@
-const SearchBar = ({ sortBot }) => {
+const SearchBar = ({ sortBots }) => {
   return (
-    <div className='container-fluid'>
-      <div className='row mx-auto bg--subtle'>
+    <div className='container-fluid bg-warning-subtle'>
+      <div className='row p-4'>
         <h1 className='text-center'>SORT BOTS</h1>
-        <div className='btn-group'>
+        <div className='btn-group shadow p-0'>
           <button
             className='btn btn-outline-primary'
-            onClick={() => sortBot('health')}
+            onClick={() => sortBots('health')}
           >
             Sort by Health
           </button>
           <button
             className='btn btn-outline-primary'
-            onClick={() => sortBot('damage')}
+            onClick={() => sortBots('damage')}
           >
             Sort by Damage
           </button>
           <button
             className='btn btn-outline-primary'
-            onClick={() => sortBot('armor')}
+            onClick={() => sortBots('armor')}
           >
             Sort by Armor
           </button>

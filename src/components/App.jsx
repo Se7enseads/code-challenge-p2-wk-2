@@ -38,10 +38,13 @@ const App = () => {
     return array.filter(item => item.id !== id)
   }
 
+  // Function to handle sorting the bots.
   const handleSortBot = sortBy => {
-    const sorted = [...bots]
-    bots.sort((botA, botB) => botB[sortBy] - botA[sortBy])
-    setBots(sorted)
+    const sorted = [...bots] // Make a copy of the bots array
+
+    sorted.sort((botA, botB) => botB[sortBy] - botA[sortBy])
+
+    setBots(sorted) // Update the state with the sorted array
   }
 
   // Function to handle adding a bot to the army.
